@@ -1,5 +1,6 @@
 source "https://rubygems.org"
-
+ 
+gem "cowsay", "~> 0.3.0"
 
 ruby "3.2.2"
 
