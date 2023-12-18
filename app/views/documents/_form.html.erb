@@ -1,0 +1,47 @@
+<%= form_with model: document do |form| %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group my-3">
+      <%= form.label :name, "Name", class: "control-label mb-2" %> <%=
+      form.text_field :name, class: "form-control" %> <%
+      document.errors.full_messages_for(:name).each do |message| %>
+      <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group my-3">
+      <%= form.label :doc_type, "Document Type", class: "control-label mb-2" %>
+
+      <%= form.select :doc_type, options_for_select(Document::DOC_TYPES, selected: document.doc_type), { prompt: "Select Document Type" } , {class: "form-select form-select-lg"} %>
+
+      <% document.errors.full_messages_for(:doc_type).each do |message| %>
+      <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group my-3">
+      <%= form.label :employee_id, "Employee Id", class: "control-label mb-2" %>
+      <%= form.select :employee_id, options_for_select(Employee.all.map { |employee| [employee.name_with_email, employee.id] }, selected: document.employee_id), { prompt: "Select Employee" } , {class: "form-select form-select-lg"} %>
+       <% document.errors.full_messages_for(:employee_id).each do |message| %>
+      <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="form-group my-3">
+      <%= form.label :image, "Image", class: "control-label mb-2" %> <%=
+      form.file_field :image, class: "form-control" %> <%
+      document.errors.full_messages_for(:image).each do |message| %>
+      <div class="text-danger"><%= message %></div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-lg-6">
+    <%= link_to "Back", documents_path, class: "btn btn-secondary col-4" %> <%=
+    form.submit "Create", class: "btn btn-primary col-4" %>
+  </div>
+</div>
+<% end %>
